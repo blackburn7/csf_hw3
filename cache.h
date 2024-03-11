@@ -15,3 +15,5 @@ struct Set {
 struct Cache {
   std::vector<Set> sets;
 };
+
+void chacheOps(Cache& cache, bool isLoad, uint32_t address, uint32_t& current_timestamp);
