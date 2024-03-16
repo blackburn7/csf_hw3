@@ -35,6 +35,15 @@ struct Cache {
 
   public:
     std::vector<Set> sets;
+
+    Cache(int totalSets, int blocks, int bytes, 
+      bool isWriteAllocate, bool isWriteBack, bool isLRU) : 
+      totalSets(totalSets), blocks(blocks), bytes(bytes), 
+      isWriteAllocate(isWriteAllocate), isWriteBack(isWriteBack), isLRU(isLRU),
+      sets(totalSets) { };
+
+    void write();
+    void load();
     void outputPrint();
 
 
