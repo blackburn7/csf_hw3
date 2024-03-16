@@ -1,6 +1,9 @@
 #include "cache.h"
 #include <cmath>
+#include <iostream>
 
+using std::cout;
+using std::endl;
 
 // changed later, these are dependent on make parameters
 uint32_t blockSize = 10;
@@ -52,4 +55,16 @@ void chacheOps(Cache& cache, bool isLoad, uint32_t address, uint32_t& current_ti
     }
 
     // alot more needs to be added on storing and loading
+}
+
+void Cache::outputPrint() {
+  cout << "Total loads: " << lCount << endl; 
+  cout << "Total stores: " << sCount << endl;
+  cout << "Load hits: " << lHit << endl;
+  int diff = lCount - lHit;
+  cout << "Load misses: " << diff << endl;
+  cout << "Store hits: " << sHit << endl;
+  diff = sCount - sHit;
+  cout << "Store misses: " << diff << endl;
+  cout << "Total cycles: " << cCount << endl;
 }
