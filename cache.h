@@ -10,6 +10,8 @@ struct Slot {
 
 struct Set {
   std::vector<Slot> slots;
+
+  bool doesTagExist(uint32_t tag);
 };
 
 struct Cache {
@@ -27,6 +29,8 @@ struct Cache {
     int lHit = 0;
     int sHit = 0;
     int cCount = 0;
+
+    
 
 
   public:

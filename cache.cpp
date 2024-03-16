@@ -5,6 +5,18 @@
 using std::cout;
 using std::endl;
 
+bool Set::doesTagExist(uint32_t tag) {
+    // traverse slots
+    for (auto it = slots.begin(); it != slots.end(); ++it) {
+        // if tags match then tag exists
+        if (it->valid && it->tag == tag) {
+            return true;
+        }
+    }
+    // no tags matched
+    return false;
+}
+
 // changed later, these are dependent on make parameters
 uint32_t blockSize = 10;
 uint32_t numberOfSets = 20;
