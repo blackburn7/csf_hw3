@@ -70,17 +70,17 @@ int main (int argc, char* argv[]) {
   uint32_t timeRepresentationCounter = 0;
 
   while (std::getline(cin, line)) {
+    char cmd = line[0];
     uint32_t address = std::stoul(line.substr(2, 10), nullptr, 16);
     
-    // calc index and tag
     // calc index and tag
     uint32_t blockAdd = address / bytes;
     uint32_t index = blockAdd % totalSets;
     uint32_t tag = blockAdd / totalSets;
 
-    if (line[0] == 'l') {
+    if (cmd == 'l') {
       cache.load(timeRepresentationCounter, index, tag);
-    } else if (line[0] == 's') {
+    } else if (cmd == 's') {
       cache.write(timeRepresentationCounter, index, tag);
     } else {
       std::cerr << "command is not s or l";

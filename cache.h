@@ -1,3 +1,6 @@
+#ifndef CACHE_H
+#define CACHE_H
+
 #include <vector>
 #include <cstdint>
 
@@ -11,7 +14,7 @@ struct Slot {
 struct Set {
   std::vector<Slot> slots;
 
-  uint32_t getTagIndex(uint32_t tag);
+  int getTagIndex(uint32_t tag);
 };
 
 struct Cache {
@@ -50,4 +53,4 @@ struct Cache {
 
 };
 
-void chacheOps(Cache& cache, bool isLoad, uint32_t address, uint32_t& current_timestamp);
+#endif // CACHE_H
