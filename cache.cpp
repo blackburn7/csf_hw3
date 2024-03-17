@@ -38,13 +38,13 @@ void Cache::write(uint32_t time, uint32_t index, uint32_t tag) {
 	int tagIndex = sets.at(index).getTagIndex(tag);
 	if (tagIndex != -1) {
 		sHit++;
-		sets.at(index).slots.at(tag).access_timestamp = time;
+		sets.at(index).slots.at(tagIndex).access_timestamp = time;
 
 		if (isWriteBack) {
-			sets.at(index).slots.at(tag).valid = false;
+			sets.at(index).slots.at(tagIndex).valid = false;
 			cCount += 1;
 		} else {
-			sets.at(index).slots.at(tag).valid = true;
+			sets.at(index).slots.at(tagIndex).valid = true;
 			cCount += 100;
 		}
 
@@ -63,13 +63,11 @@ void Cache::load(uint32_t time, uint32_t index, uint32_t tag) {
 	if (tagIndex != -1) {
 		cCount++;
 		lHit++;
-		sets.at(index).slots.at(tag).load_timestamp = time;
+		sets.at(index).slots.at(tagIndex).load_timestamp = time;
 	} else {
 		cCount += (bytes / 4) * 100;
-		writeToCache(index, tag, time);
+		writeToCache(time, index, tag);
 	}
-
-
 
 }
 
