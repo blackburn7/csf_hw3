@@ -56,7 +56,7 @@ int main (int argc, char* argv[]) {
   uint32_t bytes = std::stoi(argv[3]);
 
   // determine if rules are broken with power of 2 numbers
-  if ((totalSets & (totalSets - 1)) || (totalSets & (blocks - 1)) || (bytes & (bytes - 1)) || bytes < 4) {
+  if ((totalSets & (totalSets - 1)) || (totalSets != 1 && (totalSets & (blocks - 1))) || (bytes & (bytes - 1)) || bytes < 4) {
     std::cerr << "Failed to have power of 2 numbers or other number policies";
     return 4;
   }
