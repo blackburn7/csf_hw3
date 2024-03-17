@@ -1,12 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
-<<<<<<< HEAD
-#include <cache.h>
-=======
 #include <cstdint>
 #include "cache.h"
->>>>>>> 8e2bd6cf891c912aa0ebe3bf1116631d6a5e7001
 
 using std::cin;
 using std::string;

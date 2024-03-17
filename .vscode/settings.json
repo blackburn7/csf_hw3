@@ -3,7 +3,8 @@
     "*.css": "tailwindcss",
     "vector": "cpp",
     "cstdint": "cpp",
-    "limits": "cpp"
+    "limits": "cpp",
+    "iostream": "cpp"
   },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",
