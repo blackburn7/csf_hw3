@@ -50,9 +50,9 @@ int main (int argc, char* argv[]) {
   }
 
   // set values for key numbers of cache
-  int totalSets = std::stoi(argv[1]);
-  int blocks = std::stoi(argv[2]);
-  int bytes = std::stoi(argv[3]);
+  uint32_t totalSets = std::stoi(argv[1]);
+  uint32_t blocks = std::stoi(argv[2]);
+  uint32_t bytes = std::stoi(argv[3]);
 
   // determine if rules are broken with power of 2 numbers
   if ((totalSets & (totalSets - 1)) || (totalSets & (blocks - 1)) || (bytes & (bytes - 1)) || bytes < 4) {
@@ -72,6 +72,7 @@ int main (int argc, char* argv[]) {
   while (std::getline(cin, line)) {
     uint32_t address = std::stoul(line.substr(2, 10), nullptr, 16);
     
+    // calc index and tag
     // calc index and tag
     uint32_t blockAdd = address / bytes;
     uint32_t index = blockAdd % totalSets;
