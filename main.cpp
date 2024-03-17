@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "cache.cpp"
 
 using std::cin;
 using std::string;
