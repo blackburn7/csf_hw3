@@ -1,6 +1,7 @@
 #include "cache.h"
 #include <cmath>
 #include <iostream>
+#include <cstdint>
 
 using std::cout;
 using std::endl;
