@@ -42,8 +42,8 @@ struct Cache {
       isWriteAllocate(isWriteAllocate), isWriteBack(isWriteBack), isLRU(isLRU),
       sets(totalSets) { };
 
-    void write();
-    void load();
+    void write(uint32_t time, uint32_t index, uint32_t tag);
+    void load(uint32_t time, uint32_t index, uint32_t tag);
     void outputPrint();
 
 

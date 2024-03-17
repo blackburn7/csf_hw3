@@ -80,3 +80,25 @@ void Cache::outputPrint() {
   cout << "Store misses: " << diff << endl;
   cout << "Total cycles: " << cCount << endl;
 }
+
+
+void Cache::write(uint32_t time, uint32_t index, uint32_t tag) {
+	sCount++;
+	if (sets.at(index).doesTagExist(tag)) {
+		sHit++;
+		sets.at(index).slots.at(tag).load_timestamp = time;
+
+	} else {
+
+	}
+}
+
+void Cache::load(uint32_t time, uint32_t index, uint32_t tag) {
+	lCount++;
+	if (sets.at(index).doesTagExist(tag)) {
+
+	}
+
+
+
+}
