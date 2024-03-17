@@ -7,22 +7,6 @@ using std::cin;
 using std::string;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 int main (int argc, char* argv[]) {
   if (argc > 7 || argc < 7) {
     std::cerr << "Incorrect number of parameters";

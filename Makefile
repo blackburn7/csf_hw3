@@ -10,7 +10,7 @@ $(TARGET): main.cpp
 	
 
 zip: 
-	zip solution.zip main.cpp README.txt Makefile
+	zip solution.zip cache.h cache.cpp main.cpp README.txt Makefile
 
 clean :
 	rm -f $(TARGET)

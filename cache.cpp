@@ -5,16 +5,18 @@
 using std::cout;
 using std::endl;
 
-bool Set::doesTagExist(uint32_t tag) {
+uint32_t Set::getTagIndex(uint32_t tag) {
     // traverse slots
+		uint32_t curIndex = 0;
     for (auto it = slots.begin(); it != slots.end(); ++it) {
         // if tags match then tag exists
         if (it->valid && it->tag == tag) {
-            return true;
+            return curIndex;
         }
+				curIndex++;
     }
     // no tags matched
-    return false;
+    return -1;
 }
 
 // changed later, these are dependent on make parameters
@@ -84,21 +86,70 @@ void Cache::outputPrint() {
 
 void Cache::write(uint32_t time, uint32_t index, uint32_t tag) {
 	sCount++;
-	if (sets.at(index).doesTagExist(tag)) {
+	int tagIndex = sets.at(index).getTagIndex(tag);
+	if (tagIndex != -1) {
 		sHit++;
-		sets.at(index).slots.at(tag).load_timestamp = time;
+		sets.at(index).slots.at(tag).access_timestamp = time;
+
+		if (isWriteBack) {
+			sets.at(index).slots.at(tag).valid = false;
+			cCount += 1;
+		} else {
+			sets.at(index).slots.at(tag).valid = true;
+			cCount += 100;
+		}
 
 	} else {
-
+		if (isWriteAllocate) {
+            writeToCache(time, index, tag);
+			cCount += (bytes / 4) * 100;
+		}
+		if (!isWriteBack) cCount += 100;
 	}
 }
 
 void Cache::load(uint32_t time, uint32_t index, uint32_t tag) {
 	lCount++;
-	if (sets.at(index).doesTagExist(tag)) {
-
+	uint32_t tagIndex = sets.at(index).getTagIndex(tag);
+	if (tagIndex != -1) {
+		cCount++;
+		lHit++;
+		sets.at(index).slots.at(tag).load_timestamp = time;
+	} else {
+		cCount += (bytes / 4) * 100;
+		writeToCache(index, tag, time);
 	}
 
+
+
+}
+
+void Cache::writeToCache(uint32_t time, uint32_t index, uint32_t tag) {
+
+    // clear lru if cache is full
+    std::vector<Slot>& setToWrite = sets.at(index).slots;
+    Slot newSlot = {tag, true, time, time};
+
+    if ((int)setToWrite.size() == blocks) {
+        
+        uint32_t LRU_index = -1;
+        uint32_t LRU_timestamp = std::numeric_limits<uint32_t>::max();
+        uint32_t curIndex = 0;
+
+
+
+        for (auto it = setToWrite.begin(); it != setToWrite.end(); it++) {
+            if (it->load_timestamp < LRU_timestamp) {
+                LRU_timestamp = it->load_timestamp;
+                LRU_index = curIndex;
+            }
+
+            curIndex++;
+        }
+        setToWrite.at(LRU_index) = newSlot;
+    } else {
+        setToWrite.push_back(newSlot);
+    }
 
 
 }

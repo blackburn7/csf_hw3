@@ -11,7 +11,7 @@ struct Slot {
 struct Set {
   std::vector<Slot> slots;
 
-  bool doesTagExist(uint32_t tag);
+  uint32_t getTagIndex(uint32_t tag);
 };
 
 struct Cache {
@@ -44,6 +44,7 @@ struct Cache {
 
     void write(uint32_t time, uint32_t index, uint32_t tag);
     void load(uint32_t time, uint32_t index, uint32_t tag);
+    void writeToCache(uint32_t time, uint32_t index, uint32_t tag);
     void outputPrint();
 
 
