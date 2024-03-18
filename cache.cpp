@@ -11,7 +11,7 @@ int Set::getTagIndex(uint32_t tag) {
 	uint32_t curIndex = 0;
     for (auto it = slots.begin(); it != slots.end(); ++it) {
         // if tags match then tag exists
-        if (it->valid && it->tag == tag) {
+        if (it->tag == tag) {
             return curIndex;
         }
 		curIndex++;
@@ -92,6 +92,9 @@ void Cache::writeToCache(uint32_t time, uint32_t index, uint32_t tag) {
             }
 
             curIndex++;
+        }
+        if (!setToWrite.at(LRU_index).valid) {
+            cCount += (bytes / 4) * 100; 
         }
         setToWrite.at(LRU_index) = newSlot;
     } else {
