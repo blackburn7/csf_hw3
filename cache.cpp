@@ -93,6 +93,9 @@ void Cache::writeToCache(uint32_t time, uint32_t index, uint32_t tag) {
 
             curIndex++;
         }
+        if (!setToWrite.at(LRU_index).valid) {
+            cCount += (bytes / 4) * 100; 
+        }
         setToWrite.at(LRU_index) = newSlot;
     } else {
         setToWrite.push_back(newSlot);
