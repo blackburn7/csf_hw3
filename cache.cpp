@@ -32,24 +32,32 @@ void Cache::outputPrint() {
   cout << "Total cycles: " << cCount << endl;
 }
 
-
+// write data to the cache
 void Cache::write(uint32_t time, uint32_t index, uint32_t tag) {
+    // update total store count
 	sCount++;
+
+    // find index of slot that tag is located at
 	int tagIndex = sets.at(index).getTagIndex(tag);
+    
 	if (tagIndex != -1) {
+        // if tag exists increase hit count and update time
 		sHit++;
 		sets.at(index).slots.at(tagIndex).access_timestamp = time;
-
+        
 		if (isWriteBack) {
+            // set tag to dirty and increase cycle
 			sets.at(index).slots.at(tagIndex).valid = false;
 			cCount += 1;
 		} else {
+            // set tag to not dirty and increase cycle by 100
 			sets.at(index).slots.at(tagIndex).valid = true;
 			cCount += 100;
 		}
 
 	} else {
 		if (isWriteAllocate) {
+            // if is writeAllocate and tag DNE then write from mem. to cache
             writeToCache(time, index, tag);
 			cCount += (bytes / 4) * 100;
 		}
@@ -57,8 +65,12 @@ void Cache::write(uint32_t time, uint32_t index, uint32_t tag) {
 	}
 }
 
+// load data from the cache
 void Cache::load(uint32_t time, uint32_t index, uint32_t tag) {
+    // update total load count
 	lCount++;
+
+    // 
 	int tagIndex = sets.at(index).getTagIndex(tag);
 	if (tagIndex != -1) {
 		cCount++;
@@ -71,6 +83,7 @@ void Cache::load(uint32_t time, uint32_t index, uint32_t tag) {
 
 }
 
+// write from memory to the cache
 void Cache::writeToCache(uint32_t time, uint32_t index, uint32_t tag) {
 
     // clear lru if cache is full
