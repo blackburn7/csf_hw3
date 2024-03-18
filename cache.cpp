@@ -11,7 +11,7 @@ int Set::getTagIndex(uint32_t tag) {
 	uint32_t curIndex = 0;
     for (auto it = slots.begin(); it != slots.end(); ++it) {
         // if tags match then tag exists
-        if (it->valid && it->tag == tag) {
+        if (it->tag == tag) {
             return curIndex;
         }
 		curIndex++;
