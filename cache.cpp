@@ -83,8 +83,6 @@ void Cache::writeToCache(uint32_t time, uint32_t index, uint32_t tag) {
         uint32_t LRU_timestamp = std::numeric_limits<uint32_t>::max();
         uint32_t curIndex = 0;
 
-
-
         for (auto it = setToWrite.begin(); it != setToWrite.end(); it++) {
             if (it->load_timestamp < LRU_timestamp) {
                 LRU_timestamp = it->load_timestamp;
@@ -93,9 +91,8 @@ void Cache::writeToCache(uint32_t time, uint32_t index, uint32_t tag) {
 
             curIndex++;
         }
-        
         if (!setToWrite.at(LRU_index).valid) {
-            cCount += (bytes / 4) * 100; 
+            cCount += (bytes / 4) * 100;
         }
         setToWrite.at(LRU_index) = newSlot;
     } else {
