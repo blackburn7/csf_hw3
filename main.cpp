@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cmath>
 #include <cstdint>
 #include "cache.h"
 
@@ -77,7 +78,7 @@ int main (int argc, char* argv[]) {
     // calc index and tag
     uint32_t blockAdd = address / bytes;
     uint32_t index = blockAdd % totalSets;
-    uint32_t tag = blockAdd / totalSets;
+    uint32_t tag = blockAdd / totalSets; 
 
     if (cmd == 'l') {
       cache.load(timeRepresentationCounter, index, tag);
