@@ -106,7 +106,6 @@ void Cache::overrideLRU(std::vector<Slot> & setToWrite, Slot newSlot) {
             LRU_timestamp = it->access_timestamp;
             LRU_index = curIndex;
         }
-
         curIndex++;
     }
     if (!setToWrite.at(LRU_index).valid) {
