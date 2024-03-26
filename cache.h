@@ -48,6 +48,8 @@ struct Cache {
     void write(uint32_t time, uint32_t index, uint32_t tag);
     void load(uint32_t time, uint32_t index, uint32_t tag);
     void writeToCache(uint32_t time, uint32_t index, uint32_t tag);
+    void overrideLRU(std::vector<Slot> & setToWrite, Slot newSlot);
+    void overrideFIFO(std::vector<Slot> & setToWrite, Slot newSlot);
     void outputPrint();
 
 
