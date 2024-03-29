@@ -147,3 +147,22 @@ Store hits: 9
 Store misses: 1
 Total cycles: 409
 
+
+
+Which cache is better: based on these cache simulations and the above inputs and results, the LRU seems
+to be slightly better than the fifo, but not significantly. In all input files except for swim.trace and 
+gcc.trace, the statistics on hits, misses, and cycles were all identical. For the larger files of swim
+and gcc, there are slight differences in store hits/misses, load hits/misses, and cycles. 
+
+For gcc.trace, load hits were at 315715 for LRU and 315594 for fifo, this is a 121 load hit advantage to 
+LRU. Additionally, there were 188595 store hits for LRU compared to 188567 store hits for fifo, this is 
+a 28 store hit advantage to LRU. Finally, there were 93,051 fewer cycles in LRU in comparison to FIFO. Solely 
+based on gcc.trace, LRU has shown to be better as it results in greater hits and fewer cycles.
+
+For swim.trace, load hits were at 219730 for LRU and 219677 store hits for fifo, a 53 hit advantage to LRU. 
+There were 72027 store hits for LRU and 72015 store hits for fifo, a 12 hit advantage for LRU. Finally there
+were 46,335 fewer cycles in LRU in comparison to FIFO. Solely based on swim.trace, LRU has shown to be better
+as it results in greater hits and fewer cycles. 
+
+In conclusion, based on the above two analysises of the two cache simulations on input files gcc.trace and 
+swim.trace, LRU is clearly the better cache in comparison to FIFO. 
